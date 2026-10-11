@@ -1,0 +1,8 @@
+/* Canvas card: mode, categories or summary settings, and model. Release-scoped. */
+[data-block-release="ai_classify@0.1.0"] [data-ai-classify-node-card] { width: 100%; min-width: 0; }
+[data-block-release="ai_classify@0.1.0"] [data-ai-classify-node-card] h3 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+[data-block-release="ai_classify@0.1.0"] [data-ai-classify-node-card] .node-data-preview { overflow-wrap: anywhere; }
+[data-block-release="ai_classify@0.1.0"] [data-ai-classify-node-card] .aic-card-mode { font-family: ui-monospace, monospace; font-weight: 600; }
+[data-block-release="ai_classify@0.1.0"] [data-ai-classify-node-card] .aic-card-names { font-family: ui-monospace, monospace; }
+[data-block-release="ai_classify@0.1.0"] [data-ai-classify-node-card] .aic-card-model { opacity: .75; }
+[data-block-release="ai_classify@0.1.0"] [data-ai-classify-node-card] .aic-card-invalid { color: var(--danger, #b42318); }

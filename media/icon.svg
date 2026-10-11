@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+     stroke-linejoin="round" role="img" aria-label="AI Classify">
+  <title>AI Classify</title>
+  <path d="M5.5 2.8h13l-4.8 5.4v3.2l-3.4 1.8V8.2z"/>
+  <path d="M2.2 16.2h5.4l-.8 4.6H3z"/>
+  <path d="M9.3 16.2h5.4l-.8 4.6h-3.8z" fill="currentColor"/>
+  <path d="M16.4 16.2h5.4l-.8 4.6h-3.8z"/>
+</svg>

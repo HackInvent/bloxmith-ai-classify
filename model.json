@@ -1,0 +1,252 @@
+{
+  "kind": "ai_classify",
+  "version": "0.1.0",
+  "title": "AI Classify",
+  "description": "Classify, extract fields, score sentiment or summarize text with an LLM.",
+  "repository_url": "https://github.com/HackInvent/bloxmith-ai-classify",
+  "bloxsmith_compatibility": [
+    "1.0.9"
+  ],
+  "tested_with_bloxsmith": "1.0.9",
+  "prerequisites": [
+    {
+      "type": "manual",
+      "name": "An OpenAI-compatible endpoint serving /chat/completions or /responses: a local Ollama, LM Studio or vLLM server, or a hosted API with its key stored in the wallet."
+    },
+    {
+      "type": "manual",
+      "name": "A model that follows JSON instructions; JSON-schema structured output on the server is recommended."
+    }
+  ],
+  "locales": {
+    "en": "locales/en.json",
+    "fr": "locales/fr.json"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": 1,
+        "name": "in",
+        "title": "in",
+        "accepts": [
+          "message/*",
+          "application/json",
+          "text/plain"
+        ],
+        "multiplicity": "one",
+        "required": true,
+        "execution_requirement": "required_for_execution"
+      }
+    ],
+    "outputs": [
+      {
+        "id": 1,
+        "name": "result",
+        "title": "result",
+        "emits": [
+          "application/json",
+          "message/*"
+        ],
+        "multiplicity": "many"
+      },
+      {
+        "id": 2,
+        "name": "error",
+        "title": "error",
+        "emits": [
+          "application/json",
+          "message/*"
+        ],
+        "multiplicity": "many"
+      },
+      {
+        "id": 3,
+        "name": "unmatched",
+        "title": "unmatched",
+        "emits": [
+          "message/*",
+          "application/json",
+          "text/plain"
+        ],
+        "multiplicity": "many"
+      },
+      {
+        "id": 4,
+        "name": "question",
+        "title": "question",
+        "emits": [
+          "message/*",
+          "application/json",
+          "text/plain"
+        ],
+        "multiplicity": "many"
+      },
+      {
+        "id": 5,
+        "name": "problem",
+        "title": "problem",
+        "emits": [
+          "message/*",
+          "application/json",
+          "text/plain"
+        ],
+        "multiplicity": "many"
+      }
+    ]
+  },
+  "config": {
+    "mode": "classify",
+    "categories": [
+      {
+        "name": "question",
+        "description": "The sender asks for information, help or an explanation."
+      },
+      {
+        "name": "problem",
+        "description": "The sender reports a fault, an error, a complaint or something that does not work."
+      }
+    ],
+    "multi_label": false,
+    "sentiment_categories": [
+      {
+        "name": "positive",
+        "description": "Satisfied, thankful, enthusiastic or relieved tone."
+      },
+      {
+        "name": "neutral",
+        "description": "Factual, mixed or unclear tone without a dominant emotion."
+      },
+      {
+        "name": "negative",
+        "description": "Dissatisfied, angry, worried or disappointed tone."
+      }
+    ],
+    "fields": [
+      {
+        "name": "customer_name",
+        "type": "string",
+        "description": "Name of the person who wrote the text.",
+        "required": false
+      },
+      {
+        "name": "order_number",
+        "type": "string",
+        "description": "Order or invoice number mentioned in the text.",
+        "required": false
+      },
+      {
+        "name": "amount",
+        "type": "number",
+        "description": "Amount of money mentioned, without currency or thousands separators.",
+        "required": false
+      },
+      {
+        "name": "priority",
+        "type": "enum",
+        "description": "Urgency expressed by the sender.",
+        "required": false,
+        "values": [
+          "low",
+          "normal",
+          "high"
+        ]
+      },
+      {
+        "name": "delivery_date",
+        "type": "date",
+        "description": "Delivery or due date mentioned in the text.",
+        "required": false
+      }
+    ],
+    "summary_max_chars": 1200,
+    "summary_style": "bullets",
+    "summary_language": "same",
+    "api_base_url": "http://127.0.0.1:11434/v1",
+    "model": "llama3.2",
+    "api_key_ref": "",
+    "api_style": "chat_completions",
+    "structured_output": true,
+    "temperature": 0,
+    "max_output_tokens": 1024,
+    "timeout_sec": 120,
+    "instructions": "",
+    "text_path": "",
+    "max_input_chars": 100000,
+    "chunk_chars": 12000,
+    "max_chunks": 16,
+    "allow_remote": false,
+    "allow_insecure_http": false,
+    "ca_file": "",
+    "max_response_bytes": 2097152
+  },
+  "port_capabilities": {
+    "can_add_inputs": false,
+    "can_add_outputs": true,
+    "max_outputs": 40,
+    "default_output_emits": [
+      "message/*",
+      "application/json",
+      "text/plain"
+    ]
+  },
+  "runtime": {
+    "initial_state": "waiting",
+    "runtime_executable": true,
+    "active_worker": true,
+    "centralized_executor": "generic",
+    "centralized_dependency_mode": "all_inputs",
+    "active_execution_policy": "on_each_event"
+  },
+  "ui_assets": {
+    "modal": [
+      {
+        "kind": "css",
+        "path": "assets/css/properties.css"
+      },
+      {
+        "kind": "css",
+        "path": "assets/css/editor.css"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/properties.js"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/settings.js"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/block_modal.js"
+      }
+    ],
+    "inspector_panel": [
+      {
+        "kind": "css",
+        "path": "assets/css/properties.css"
+      },
+      {
+        "kind": "css",
+        "path": "assets/css/editor.css"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/properties.js"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/settings.js"
+      },
+      {
+        "kind": "js",
+        "path": "assets/js/inspector_panel.js"
+      }
+    ],
+    "node_card": [
+      {
+        "kind": "css",
+        "path": "assets/css/node_card.css"
+      }
+    ]
+  }
+}
